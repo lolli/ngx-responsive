@@ -18,7 +18,6 @@ import { IResponsiveSubscriptions } from '../../interfaces';
 import { ResponsiveState } from '../responsive-state/responsive-state';
 import { PlatformService } from '../platform-service/platform.service';
 
-@Injectable()
 export abstract class RESPONSIVE_BASE<T> implements OnInit, OnDestroy {
 
     private _noRepeat = 0;
