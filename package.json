@@ -72,7 +72,7 @@
   "homepage": "https://github.com/ManuCutillas/ngx-responsive",
   "private": false,
   "peerDependencies": {
-    "rxjs": "^6.5.3"
+    "rxjs": "^6.6.3"
   },
   "devDependencies": {
     "@angular/animations": "^10.2.3",
