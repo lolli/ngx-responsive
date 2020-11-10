@@ -5,6 +5,7 @@
   "description": "Superset of RESPONSIVE DIRECTIVES to show or hide items according to the size of the device screen and another features in Angular 9",
   "scripts": {
     "start": "ng serve --aot",
+    "postinstall": "ngcc",
     "build": "ng-packagr -p ng-package.json",
     "build:watch": "onchange -i -k 'src/**/*.ts' -- npm run build",
     "compodoc": "compodoc -p tsconfig.json",
