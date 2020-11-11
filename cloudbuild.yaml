@@ -23,6 +23,11 @@ steps:
       - name: home
         path: /root/
   - name: node:current-alpine
+    id: Build
+    entrypoint: yarn
+    args:
+      - build
+  - name: node:current-alpine
     id: Set new version
     entrypoint: yarn
     args:
