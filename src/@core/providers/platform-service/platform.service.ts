@@ -14,8 +14,8 @@ export class PlatformService {
     @Inject(PLATFORM_ID) private readonly _platformId,
     @Inject(ResponsiveConfig) private responsiveConfig: ResponsiveConfig
   ) {
-    this.isServer = isPlatformServer(_platformId);
-    this.isBrowser = isPlatformBrowser(_platformId);
+    this.isServer = isPlatformServer(this._platformId);
+    this.isBrowser = isPlatformBrowser(this._platformId);
   }
 
   public isEnabledForPlatform() {
