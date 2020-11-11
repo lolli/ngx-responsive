@@ -32,6 +32,8 @@ steps:
     entrypoint: yarn
     args:
       - version
+      - --cwd
+      - ./dist
       - --new-version=$TAG_NAME
       - --no-git-tag-version
   # We have to publish using npm because yarn expects all publishing to go to the public yarnpkg
@@ -41,6 +43,7 @@ steps:
     entrypoint: npm
     args:
       - publish
+      - ./dist
     env:
       - HOME=/root/
     volumes:
