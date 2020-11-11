@@ -1,5 +1,6 @@
 steps:
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: gcr.io/cloud-builders/gcloud
+    id: Decrypt npmrc
     args:
       - kms
       - decrypt
@@ -9,42 +10,34 @@ steps:
       - --keyring=gcb-keyring
       - --key=npm-key
     volumes:
-      - name: 'home'
+      - name: home
         path: /root/
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: node:current-alpine
+    id: Install dependencies
+    entrypoint: yarn
     args:
-      - kms
-      - decrypt
-      - --ciphertext-file=yarnrc.enc
-      - --plaintext-file=/root/.yarnrc
-      - --location=global
-      - --keyring=gcb-keyring
-      - --key=npm-key
-    volumes:
-      - name: 'home'
-        path: /root/
-  - name: 'node:current-alpine'
-    entrypoint: yarn
-    args: ['install']
+      - install
     env:
       - HOME=/root/
     volumes:
-      - name: 'home'
+      - name: home
         path: /root/
-  - name: 'node:current-alpine'
+  - name: node:current-alpine
+    id: Set new version
     entrypoint: yarn
-    args: ['version', '--new-version=$TAG_NAME', '--no-git-tag-version']
-    volumes:
-      - name: 'home'
-        path: /root/
-  - name: 'node:current-alpine'
-    entrypoint: yarn
-    args: ['run', 'build']
-  - name: 'node:current-alpine'
-    entrypoint: yarn
-    args: ['publish', '--non-interactive', '--no-git-tag-version']
+    args:
+      - version
+      - --new-version=$TAG_NAME
+      - --no-git-tag-version
+  # We have to publish using npm because yarn expects all publishing to go to the public yarnpkg
+  # registry. It's a known issue in yarn.
+  - name: node:current-alpine
+    id: Publish
+    entrypoint: npm
+    args:
+      - publish
     env:
       - HOME=/root/
     volumes:
-      - name: 'home'
+      - name: home
         path: /root/
