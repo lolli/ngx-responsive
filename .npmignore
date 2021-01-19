@@ -1,10 +1,16 @@
-.idea
-# Node generated files
-node_modules
-npm-debug.log
-# OS generated files
-Thumbs.db
-.DS_Store
-# Ignored files
-documentation
-dist
+*.log
+.git
+.gitignore
+.nyc_output
+lib
+src
+test
+tsconfig*.json
+tslint.json
+*.enc
+.mocharc.yaml
+.eslintignore
+.eslintrc*
+cloudbuild*.yaml
+.editorconfig
+.npmrc

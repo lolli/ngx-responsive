@@ -12,7 +12,7 @@ steps:
     volumes:
       - name: home
         path: /root/
-  - name: node:current-alpine
+  - name: node:10-alpine
     id: Install dependencies
     entrypoint: yarn
     args:
@@ -22,12 +22,12 @@ steps:
     volumes:
       - name: home
         path: /root/
-  - name: node:current-alpine
+  - name: node:10-alpine
     id: Build
     entrypoint: yarn
     args:
       - build
-  - name: node:current-alpine
+  - name: node:10-alpine
     id: Set new version
     entrypoint: yarn
     args:
@@ -38,7 +38,7 @@ steps:
       - --no-git-tag-version
   # We have to publish using npm because yarn expects all publishing to go to the public yarnpkg
   # registry. It's a known issue in yarn.
-  - name: node:current-alpine
+  - name: node:10-alpine
     id: Publish
     entrypoint: npm
     args:
